@@ -6,13 +6,19 @@ contract ownable {
     address public owner;
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
-    function Ownable() public {
-        owner = msg.sender;
+    constructor() {
+        _transferOwnership(msg.sender);
     }
 
     function transferOwnership(address newOwner) public {
-        require(msg.sender == owner);
+        require(owner == msg.sender, "Only the owner of the contract can transfer the ownership");
+        _transferOwnership(newOwner);
+    }
+    function _transferOwnership(address newOwner) internal {
         emit OwnershipTransferred(owner, newOwner);
         owner = newOwner;
+    }
+    function getOwner() public view returns (address) {
+        return owner;
     }
 }
