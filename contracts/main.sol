@@ -1,6 +1,20 @@
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.11;
 
-import "./erc721.sol";
+import "./ERC721.sol";
+import "./ownable.sol";
 
-contract MyNFT is ERC721 {
+contract MyNFT is ERC721, ownable {
+    uint mintingPrice = 0.001 ether;
+    uint tokenAvailable = 0;
+    function mint() public payable {
+        require(msg.value ==mintingPrice,"Must pay for minting the token");
+        tokenAvailable++;
+        _owners[tokenAvailable] = msg.sender;
+    }
+
+    function withdraw() external {
+        require(msg.sender == owner);
+        payable(msg.sender).transfer(address(this).balance);
+    }
 }

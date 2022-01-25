@@ -7,7 +7,7 @@ import "./IERC721.sol";
 contract ERC721 is IERC721 {
 
     // Mapping from token ID to owner address
-    mapping(uint256 => address) private _owners;
+    mapping(uint256 => address) internal _owners;
 
     // Mapping owner address to token count
     mapping(address => uint256) private _balances;
