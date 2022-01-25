@@ -5,12 +5,13 @@ import "./ERC721.sol";
 import "./ownable.sol";
 
 contract MyNFT is ERC721, ownable {
-    uint mintingPrice = 0.001 ether;
-    uint tokenAvailable = 0;
+    uint private mintingPrice = 0.001 ether;
+    uint private tokenAvailable = 0;
     function mint() public payable {
         require(msg.value ==mintingPrice,"Must pay for minting the token");
         tokenAvailable++;
         _owners[tokenAvailable] = msg.sender;
+        _balances[msg.sender] += 1;
     }
 
     function withdraw() external {
