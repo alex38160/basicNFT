@@ -28,7 +28,13 @@ contract ERC721 is IERC721 {
         _;
     }
 
-    function _transfer(address _from, address _to, uint256 _tokenId) private onlyOwnerOf(_tokenId) {
+    function _approve(address _to, uint256 _tokenId) internal onlyOwnerOf(_tokenId){
+        _tokenApprovals[_tokenId] = _to;
+        emit Approval(msg.sender,_to,_tokenId);
+    }
+
+    function _transfer(address _from, address _to, uint256 _tokenId) private {
+        _approve(_to,_tokenId);
         _balances[_from] -= 1;
         _balances[_to] += 1;
         _owners[_tokenId] = _to;
@@ -39,9 +45,8 @@ contract ERC721 is IERC721 {
         _transfer(msg.sender,_to,_tokenId);
     }
 
-    function approve(address _to, uint256 _tokenId) external override onlyOwnerOf(_tokenId){
-        _tokenApprovals[_tokenId] = _to;
-        emit Approval(msg.sender,_to,_tokenId);
+    function approve(address to, uint256 tokenId) public override {
+        _approve(to, tokenId);
     }
 
     function takeOwnership(uint256 _tokenId) external override{
