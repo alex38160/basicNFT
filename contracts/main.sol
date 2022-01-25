@@ -18,4 +18,8 @@ contract MyNFT is ERC721, ownable {
         require(msg.sender == owner);
         payable(msg.sender).transfer(address(this).balance);
     }
+
+    function getBalance() external view returns (uint) {
+        return address(this).balance;
+    }
 }
