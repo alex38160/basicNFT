@@ -4,7 +4,7 @@ pragma solidity ^0.8.11;
 
 import "./IERC721.sol";
 
-abstract contract ERC721 is IERC721 {
+contract ERC721 is IERC721 {
     // Mapping from token ID to owner address
     mapping(uint256 => address) internal _owners;
 
@@ -73,22 +73,50 @@ abstract contract ERC721 is IERC721 {
         address _to,
         uint256 _tokenId
     ) public payable override {
-        _transfer(_from, _to, _tokenId);
-    }
-
-    function transferTo(address _to, uint256 _tokenId) public payable {
-        _transfer(msg.sender, _to, _tokenId);
+        safeTransferFrom(_from, _to, _tokenId, "");
     }
 
     function transferFrom(
         address _from,
         address _to,
         uint256 _tokenId
+    ) public payable {
+        _transfer(_from, _to, _tokenId);
+    }
+
+    function safeTransferFrom(
+        address _from,
+        address _to,
+        uint256 _tokenId,
+        bytes memory data
     ) public payable override {
         _transfer(_from, _to, _tokenId);
     }
 
     function approve(address to, uint256 tokenId) public override {
         _approve(to, tokenId);
+    }
+
+    function getApproved(uint256 _tokenId)
+        external
+        view
+        override
+        returns (address)
+    {
+        return _tokenApprovals[_tokenId];
+    }
+
+    function setApprovalForAll(address _operator, bool _approved)
+        external
+        override
+    {}
+
+    function isApprovedForAll(address _owner, address _operator)
+        external
+        view
+        override
+        returns (bool)
+    {
+        return true;
     }
 }

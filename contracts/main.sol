@@ -4,7 +4,7 @@ pragma solidity ^0.8.11;
 import "./ERC721.sol";
 import "./ownable.sol";
 
-abstract contract MyNFT is ERC721, ownable {
+contract MyNFT is ERC721, ownable {
     uint256 private mintingPrice = 0.001 ether;
     uint256 private tokenAvailable = 0;
 
