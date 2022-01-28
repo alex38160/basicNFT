@@ -1,6 +1,10 @@
 const http = require("http");
 const fs = require('fs').promises;
 
+const express = require('express');
+const app = express();
+app.use(express.static('public'));
+
 const host = 'localhost';
 const port = 8000;
 
@@ -22,3 +26,4 @@ fs.readFile(__dirname+"/index.html")
     .catch(err => {
         process.exit(1);
     })
+

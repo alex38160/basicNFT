@@ -1,12 +1,20 @@
 <!doctype html>
 <html>
   <head>
-    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script src="interactBlockchain.js"></script>
+    <script type="text/javascript" src="js/interactBlockchain.js"></script>
     <title>NFT</title>
   </head>
   <body>
     <h1>Welcome to my NFT page</h1>
-
+    <p> The owner of the contract is: </p>
+    <p> If you want to mint your personal NFT: (0.001 ether) 
+      <button onclick="hello()">Mint</button>
+    </p>
+    <p> If you want to transfer a token 
+      <button onclick="transfer()">Transfer</button>
+    </p>
+    <p> If you want to know who belongs a NFT (by putting the tokenID)
+      <button onclick="owners()">Search</button>
+    </p>
   </body>
 </html>
