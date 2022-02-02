@@ -1,8 +1,7 @@
 const http = require("http");
 const fs = require('fs').promises;
 
-const express = require('express');
-const app = express();
+const app = require("./app")
 app.use(express.static('public'));
 
 const host = 'localhost';
