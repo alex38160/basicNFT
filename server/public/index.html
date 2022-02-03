@@ -1,14 +1,16 @@
 <!doctype html>
 <html>
   <head>
-    <script type="text/javascript" src="js/interactBlockchain.js"></script>
     <title>NFT</title>
+    <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
   <body>
+    <div id="metamaskMissing">You don't have metamask installed on your browser. Please install it before being able to interact with this webpage.</div>
+
     <h1>Welcome to my NFT page</h1>
     <p> The owner of the contract is: </p>
     <p> If you want to mint your personal NFT: (0.001 ether) 
-      <button onclick="hello()">Mint</button>
+      <button id="mintButton">Mint</button>
     </p>
     <p> If you want to transfer a token 
       <button onclick="transfer()">Transfer</button>
@@ -17,4 +19,7 @@
       <button onclick="owners()">Search</button>
     </p>
   </body>
+  <script type="text/javascript" src="interactBlockchain.js"></script>
+  <script type="text/javascript" src="web3.min.js"></script>
+  <script type="text/javascript" src="erc721abi.js"></script>
 </html>

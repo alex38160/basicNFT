@@ -1,4 +1,50 @@
-const Web3 = require("web3")
+var waitForLoad = () => {
+    return new Promise((resolve, reject) => {
+        window.addEventListener('load', resolve)
+    })
+}
+
+var mintButtonFunc = async contract => {
+    
+}
+
+var main = async () => {
+    await waitForLoad()
+
+    console.log(`I'm here`)
+    if(typeof web3 !== 'undefined') document.getElementById('metamaskMissing').classList.add('displayNone')
+    else return
+
+    const Provider = new Web3(web3.currentProvider)
+
+    const myContract = new Provider.eth.Contract(window.erc721abi, '0x71CF1e20763F5A933B24166443A067e2168cE893')
+
+    console.log(myContract)
+
+
+    document.getElementById('mintButton').addEventListener('click', () => { mintButtonFunc(myContract) })
+
+
+    let result
+    try{
+        result = await myContract.methods.tokenURI(1).call()
+    }catch(err){
+        
+    }
+
+
+
+    console.log(result)
+}
+
+main()
+
+
+
+
+
+
+/*const Web3 = require("web3")
 const abi = require("./contractABI.json")
 const contract = new web3.eth.Contract([abi], address)
 
@@ -31,3 +77,4 @@ contract.methods.getBalance().call(function (err, res) {
     }
     console.log("The balance is: ", res)
   })
+*/
